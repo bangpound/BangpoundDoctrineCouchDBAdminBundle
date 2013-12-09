@@ -1,7 +1,7 @@
-Doctrine MongoDB Admin Bundle
+Doctrine CouchDB Admin Bundle
 =========================
 
-The ``Doctrine MongoDB ODM Admin`` provides services to work with the ``Admin Bundle`` and the ``Doctrine Project``.
+The ``Doctrine CouchDB ODM Admin`` provides services to work with the ``Admin Bundle`` and the ``Doctrine Project``.
 
 **Google Groups**: For questions and proposals you can post on these google groups
 

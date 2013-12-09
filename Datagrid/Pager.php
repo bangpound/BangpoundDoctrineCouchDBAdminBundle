@@ -10,10 +10,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Datagrid;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid;
 
 use Sonata\AdminBundle\Datagrid\Pager as BasePager;
-use Doctrine\ODM\MongoDB\Query\Query;
+use Doctrine\ODM\CouchDB\View\Query;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
  * Doctrine pager class.
@@ -23,21 +24,19 @@ use Doctrine\ODM\MongoDB\Query\Query;
  */
 class Pager extends BasePager
 {
-    protected $queryBuilder = null;
+    /** @var ProxyQueryInterface */
+    protected $query;
 
     /**
      * {@inheritdoc}
      */
     public function computeNbResult()
     {
-        $countQuery = clone $this->getQuery();
+        $countQuery = clone $this->query;
+        $countQuery->setLimit(0);
+        $result = $countQuery->execute();
 
-        if (count($this->getParameters()) > 0) {
-            $countQuery->setParameters($this->getParameters());
-        }
-
-        // TODO: use map/reduce for that
-        return $this->getQuery()->execute()->count();
+        return $result->getTotalRows();
     }
 
     /**
@@ -45,15 +44,7 @@ class Pager extends BasePager
      */
     public function getResults()
     {
-        return $this->getQuery()->execute();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuery()
-    {
-        return $this->query;
+        return $this->query->execute();
     }
 
     /**
@@ -65,11 +56,11 @@ class Pager extends BasePager
 
         $this->setNbResults($this->computeNbResult());
 
-        $this->getQuery()->setFirstResult(0);
-        $this->getQuery()->setMaxResults(0);
+        $this->query->setFirstResult(null);
+        $this->query->setMaxResults(null);
 
         if (count($this->getParameters()) > 0) {
-            $this->getQuery()->setParameters($this->getParameters());
+            $this->query->setParameters($this->getParameters());
         }
 
         if (0 == $this->getPage() || 0 == $this->getMaxPerPage() || 0 == $this->getNbResults()) {
@@ -79,8 +70,8 @@ class Pager extends BasePager
 
             $this->setLastPage(ceil($this->getNbResults() / $this->getMaxPerPage()));
 
-            $this->getQuery()->setFirstResult($offset);
-            $this->getQuery()->setMaxResults($this->getMaxPerPage());
+            $this->query->setFirstResult($offset);
+            $this->query->setMaxResults($this->getMaxPerPage());
         }
     }
 }

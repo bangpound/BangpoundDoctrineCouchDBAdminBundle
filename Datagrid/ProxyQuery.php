@@ -10,9 +10,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Datagrid;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid;
 
-use Doctrine\ODM\MongoDB\Query\Builder;
+use Doctrine\ODM\CouchDB\DocumentRepository;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
@@ -20,18 +20,35 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
  */
 class ProxyQuery implements ProxyQueryInterface
 {
-    protected $queryBuilder;
+
+    protected $query;
+    protected $repository;
+
+    /**
+     * @var array
+     */
+    protected $params = array();
+
     protected $sortBy;
     protected $sortOrder;
     protected $firstResult;
     protected $maxResults;
 
+    protected $documentType;
+
     /**
-     * @param \Doctrine\ODM\MongoDB\Query\Builder $queryBuilder
+     * @param DocumentRepository $repository
      */
-    public function __construct(Builder $queryBuilder)
+    public function __construct(DocumentRepository $repository, $designDocumentName = 'doctrine_repositories', $viewName = 'equal_constraint')
     {
-        $this->queryBuilder = $queryBuilder;
+        $this->repository = $repository;
+
+        $this->documentType = str_replace("\\", ".", $repository->getDocumentName());
+
+        $this->query = $repository
+            ->getDocumentManager()
+            ->createQuery($designDocumentName, $viewName)
+        ;
     }
 
     /**
@@ -41,36 +58,37 @@ class ProxyQuery implements ProxyQueryInterface
      */
     public function execute(array $params = array(), $hydrationMode = null)
     {
-        // always clone the original queryBuilder
-        $queryBuilder = clone $this->queryBuilder;
-
-        // todo : check how doctrine behave, potential SQL injection here ...
-        $sortBy = $this->getSortBy();
-        if ($sortBy) {
-            $queryBuilder->sort($sortBy, $this->getSortOrder());
-        }
-
-        return $queryBuilder->getQuery()->execute($params, $hydrationMode);
+        return $this->query->onlyDocs(true)->execute();
     }
 
     public function __call($name, $args)
     {
-        return call_user_func_array(array($this->queryBuilder, $name), $args);
+        return call_user_func_array(array($this->query, $name), $args);
     }
 
+    /**
+     * @param array $parentAssociationMappings
+     * @param array $fieldMapping
+     */
     public function setSortBy($parentAssociationMappings, $fieldMapping)
     {
-        $this->sortBy = $fieldMapping['fieldName'];
+        // No-op because CouchDB can only sort by key.
     }
 
     public function getSortBy()
     {
-        return $this->sortBy;
+        // No-op because CouchDB can only sort by key.
     }
 
+    /**
+     * @param mixed $sortOrder
+     */
     public function setSortOrder($sortOrder)
     {
         $this->sortOrder = $sortOrder;
+        if ('DESC' === $this->sortOrder) {
+            $this->query->setDescending(true);
+        }
     }
 
     public function getSortOrder()
@@ -80,25 +98,18 @@ class ProxyQuery implements ProxyQueryInterface
 
     public function getSingleScalarResult()
     {
-        $query = $this->queryBuilder->getQuery();
+        $query = $this->query;
 
         return $query->getSingleResult();
     }
 
-    public function __clone()
-    {
-        $this->queryBuilder = clone $this->queryBuilder;
-    }
-
-    public function getQueryBuilder()
-    {
-        return $this->queryBuilder;
-    }
-
+    /**
+     * @param int $firstResult
+     */
     public function setFirstResult($firstResult)
     {
         $this->firstResult = $firstResult;
-        $this->queryBuilder->skip($firstResult);
+        $this->query->setSkip((int) $this->firstResult);
     }
 
     public function getFirstResult()
@@ -106,10 +117,13 @@ class ProxyQuery implements ProxyQueryInterface
         return $this->firstResult;
     }
 
+    /**
+     * @param int $maxResults
+     */
     public function setMaxResults($maxResults)
     {
         $this->maxResults = $maxResults;
-        $this->queryBuilder->limit($maxResults);
+        $this->query->setLimit((int) $this->maxResults);
     }
 
     public function getMaxResults()

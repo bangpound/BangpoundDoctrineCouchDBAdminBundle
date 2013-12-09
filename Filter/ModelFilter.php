@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter;
 
 use Sonata\AdminBundle\Form\Type\EqualType;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
@@ -34,8 +34,6 @@ class ModelFilter extends Filter
         if ($data['value'] instanceof Collection) {
             $data['value'] = $data['value']->toArray();
         }
-
-        $field = $this->getIdentifierField($field);
 
         if (is_array($data['value'])) {
             $this->handleMultiple($queryBuilder, $alias, $field, $data);
@@ -100,29 +98,16 @@ class ModelFilter extends Filter
     /**
      * Return \MongoId if $id is MongoId in string representation, otherwise custom string
      *
-     * @param  mixed     $id
+     * @param  mixed           $id
      * @return \MongoId|string
      */
     protected static function fixIdentifier($id)
     {
         try {
-            return new \MongoId($id);
-        } catch (\MongoException $ex) {
+            return new \Doctrine\ODM\CouchDB\Id($id);
+        } catch (\CouchDBException $ex) {
             return $id;
         }
-    }
-
-    /**
-     * Identifier field name is 'field' if mapping type is simple; otherwise, it's 'field.$id'
-     *
-     * @param  string $field
-     * @return string
-     */
-    protected function getIdentifierField($field)
-    {
-        $field_mapping = $this->getFieldMapping();
-
-        return (true === $field_mapping['simple']) ? $field : $field . '.$id';
     }
 
     public function getDefaultOptions()

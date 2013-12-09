@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Util;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Util;
 
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\CouchDB\DocumentManager;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;

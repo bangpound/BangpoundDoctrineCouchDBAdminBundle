@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter;
 
 use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
@@ -18,13 +18,14 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 class StringFilter extends Filter
 {
     /**
-     * @param ProxyQueryInterface $queryBuilder
-     * @param string              $alias
+     * @param ProxyQueryInterface $query
+     * @param string              $name
      * @param string              $field
      * @param string              $data
-     * @return
+     * @internal param string $alias
+     * @return void
      */
-    public function filter(ProxyQueryInterface $queryBuilder, $name, $field, $data)
+    public function filter(ProxyQueryInterface $query, $name, $field, $data)
     {
         if (!$data || !is_array($data) || !array_key_exists('value', $data)) {
             return;
@@ -39,11 +40,24 @@ class StringFilter extends Filter
         $data['type'] = isset($data['type']) && !empty($data['type']) ? $data['type'] : ChoiceType::TYPE_CONTAINS;
 
         if ($data['type'] == ChoiceType::TYPE_EQUAL) {
-            $queryBuilder->field($field)->equals($data['value']);
+            $query->setKeys([
+                $query->getDocumentType(),
+                $field,
+                $data['value'],
+            ]);
         } elseif ($data['type'] == ChoiceType::TYPE_CONTAINS) {
-            $queryBuilder->field($field)->equals(new \MongoRegex(sprintf('/%s/i', $data['value'])));
+            $query->setStartKey([
+                $query->getDocumentType(),
+                $field,
+                $data['value'],
+            ]);
+
+            $query->setEndKey([
+                $query->getDocumentType(),
+                $field,
+                $data['value']."\\xFFF0",
+            ]);
         } elseif ($data['type'] == ChoiceType::TYPE_NOT_CONTAINS) {
-            $queryBuilder->field($field)->not(new \MongoRegex(sprintf('/%s/i', $data['value'])));
         }
 
         $this->active = true;

@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter;
 
 use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;

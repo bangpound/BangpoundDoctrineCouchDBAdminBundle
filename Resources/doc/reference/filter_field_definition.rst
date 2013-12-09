@@ -27,12 +27,12 @@ Filter types available
 
 Some filter types are missing. Contributions are welcome.
 
-  - doctrine_mongo_boolean        : depends on the ``sonata_type_filter_default`` Form Type, renders yes or no field
-  - doctrine_mongo_callback       : depends on the ``sonata_type_filter_default`` Form Type, types can be configured as needed
-  - doctrine_mongo_choice         : depends on the ``sonata_type_filter_choice`` Form Type, renders yes or no field
-  - doctrine_mongo_model          : depends on the ``sonata_type_filter_number`` Form Type
-  - doctrine_mongo_string         : depends on the ``sonata_type_filter_choice``
-  - doctrine_mongo_number         : depends on the ``sonata_type_filter_choice`` Form Type, renders yes or no field
+  - doctrine_couch_boolean        : depends on the ``sonata_type_filter_default`` Form Type, renders yes or no field
+  - doctrine_couch_callback       : depends on the ``sonata_type_filter_default`` Form Type, types can be configured as needed
+  - doctrine_couch_choice         : depends on the ``sonata_type_filter_choice`` Form Type, renders yes or no field
+  - doctrine_couch_model          : depends on the ``sonata_type_filter_number`` Form Type
+  - doctrine_couch_string         : depends on the ``sonata_type_filter_choice``
+  - doctrine_couch_number         : depends on the ``sonata_type_filter_choice`` Form Type, renders yes or no field
 
 Example
 -------
@@ -146,7 +146,7 @@ or not.
                 ->add('enabled')
                 ->add('tags', null, array(), null, array('expanded' => true, 'multiple' => true))
                 ->add('author')
-                ->add('finished', 'doctrine_mongo_callback', array(
+                ->add('finished', 'doctrine_couch_callback', array(
                     'callback' => function($queryBuilder, $alias, $field, $value) {
                         if (!$value) {
                             return;

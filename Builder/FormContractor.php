@@ -10,14 +10,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Builder;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Builder;
 
-use Sonata\DoctrineMongoDBAdminBundle\Admin\FieldDescription;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Admin\FieldDescription;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Builder\FormContractorInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Doctrine\ODM\CouchDB\Mapping\ClassMetadata;
 
 class FormContractor implements FormContractorInterface
 {
@@ -57,7 +57,7 @@ class FormContractor implements FormContractorInterface
         $fieldDescription->setAdmin($admin);
         $fieldDescription->setOption('edit', $fieldDescription->getOption('edit', 'standard'));
 
-        if (in_array($fieldDescription->getMappingType(), array(ClassMetadataInfo::ONE, ClassMetadataInfo::MANY))) {
+        if (in_array($fieldDescription->getMappingType(), array(ClassMetadata::TO_ONE, ClassMetadata::TO_MANY))) {
             $admin->attachAdminClass($fieldDescription);
         }
     }

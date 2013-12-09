@@ -1,5 +1,5 @@
-Doctrine MongoDB Proxy Query
-========================
+Doctrine CouchDB Proxy Query
+============================
 
 
 The ``ProxyQuery`` object is used to add missing features from the original Doctrine Query builder :
@@ -11,7 +11,7 @@ The ``ProxyQuery`` object is used to add missing features from the original Doct
 .. code-block:: php
 
     <?php
-    use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
+    use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid\ProxyQuery;
 
     $queryBuilder = $this->em->createQueryBuilder();
 

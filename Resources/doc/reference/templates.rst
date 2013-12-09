@@ -21,17 +21,17 @@ You can also configure the templates used by the Form Framework while rendering 
 
 .. code-block:: yaml
 
-    sonata_doctrine_mongodb_admin:
+    sonata_doctrine_couchdb_admin:
         templates:
-            form: [ SonataDoctrineMongoDBAdminBundle:Form:form_admin_fields.html.twig ]
-            filter: [ SonataDoctrineMongoDBAdminBundle:Form:filter_admin_fields.html.twig ]
+            form: [ BangpoundDoctrineCouchDBAdminBundle:Form:form_admin_fields.html.twig ]
+            filter: [ BangpoundDoctrineCouchDBAdminBundle:Form:filter_admin_fields.html.twig ]
 
 
 You can also customize field types
 
 .. code-block:: yaml
 
-    sonata_doctrine_mongodb_admin:
+    sonata_doctrine_couchdb_admin:
         templates:
         types:
             list:
@@ -46,7 +46,7 @@ You can also customize field types by adding types in the ``config.yml`` file. T
 
 .. code-block:: yaml
 
-    sonata_doctrine_mongodb_admin:
+    sonata_doctrine_couchdb_admin:
         templates:
             types:
                 list:

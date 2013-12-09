@@ -1,7 +1,7 @@
 Configuration
 =============
 
-The configuration section is only about the ``SonataDoctrineMongoDBAdminBundle`` for more information about the
+The configuration section is only about the ``BangpoundDoctrineCouchDBAdminBundle`` for more information about the
 global configuration of the ``SonataAdminBundle`` please refer to the dedicated documentation.
 
 Full Configuration Options
@@ -9,15 +9,15 @@ Full Configuration Options
 
 .. code-block:: yaml
 
-    sonata_doctrine_mongo_db_admin:
+    sonata_doctrine_couch_db_admin:
         # default value is null, so doctrine uses the value defined in the configuration
         entity_manager: ~
 
         templates:
             form:
-                - SonataDoctrineMongoDBAdminBundle:Form:form_admin_fields.html.twig
+                - BangpoundDoctrineCouchDBAdminBundle:Form:form_admin_fields.html.twig
             filter:
-                - SonataDoctrineMongoDBAdminBundle:Form:filter_admin_fields.html.twig
+                - BangpoundDoctrineCouchDBAdminBundle:Form:filter_admin_fields.html.twig
             types:
                 list:
                     array:      SonataAdminBundle:CRUD:list_array.html.twig

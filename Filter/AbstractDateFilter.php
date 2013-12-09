@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter;
 
 use Sonata\AdminBundle\Form\Type\Filter\DateType;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
@@ -132,7 +132,7 @@ abstract class AbstractDateFilter extends Filter
     }
 
     /**
-     * Resolves DataType:: constants to MongoDb operators
+     * Resolves DataType:: constants to CouchDb operators
      *
      * @param integer $type
      *

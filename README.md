@@ -1,11 +1,11 @@
-Doctrine MongoDB Admin
+Doctrine CouchDB Admin
 ======================
 
-[![Build Status](https://travis-ci.org/sonata-project/SonataDoctrineMongoDBAdminBundle.png?branch=master)](https://travis-ci.org/sonata-project/SonataDoctrineMongoDBAdminBundle)
+[![Build Status](https://travis-ci.org/sonata-project/BangpoundDoctrineCouchDBAdminBundle.png?branch=master)](https://travis-ci.org/sonata-project/BangpoundDoctrineCouchDBAdminBundle)
 
-This bundle integrates the SonataAdminBundle with the Doctrine MongoDB ODM project.
+This bundle integrates the SonataAdminBundle with the Doctrine CouchDB ODM project.
 
-For contribution to the documentation you cand find it on [Resources/doc](https://github.com/sonata-project/SonataDoctrineMongoDBAdminBundle/tree/master/Resources/doc).
+For contribution to the documentation you cand find it on [Resources/doc](https://github.com/sonata-project/BangpoundDoctrineCouchDBAdminBundle/tree/master/Resources/doc).
 
 **Warning**: documentation files are not rendering correctly in Github (reStructuredText format)
 and some content might be broken or hidden, make sure to read raw files.

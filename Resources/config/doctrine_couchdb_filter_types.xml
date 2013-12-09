@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sonata.admin.odm.filter.type.boolean" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\BooleanFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_boolean" />
+        </service>
+
+        <service id="sonata.admin.odm.filter.type.callback" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\CallbackFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_callback" />
+        </service>
+
+        <service id="sonata.admin.odm.filter.type.choice" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\ChoiceFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_choice" />
+        </service>
+
+        <service id="sonata.admin.odm.filter.type.model" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\ModelFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_model" />
+        </service>
+
+        <service id="sonata.admin.odm.filter.type.string" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\StringFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_string" />
+        </service>
+
+        <service id="sonata.admin.odm.filter.type.number" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\NumberFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_number" />
+        </service>
+
+        <service id="sonata.admin.odm.filter.type.date" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\DateFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_date" />
+        </service>
+
+        <service id="sonata.admin.odm.filter.type.datetime" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\DateTimeFilter">
+            <tag name="sonata.admin.filter.type" alias="doctrine_couch_datetime" />
+        </service>
+    </services>
+</container>

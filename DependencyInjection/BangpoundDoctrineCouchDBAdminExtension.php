@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\DependencyInjection;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,7 +25,7 @@ use Symfony\Component\Config\Definition\Processor;
  * @author      Thomas Rabaix <thomas.rabaix@sonata-project.org>
  * @author      Michael Williams <michael.williams@funsational.com>
  */
-class SonataDoctrineMongoDBAdminExtension extends AbstractSonataAdminExtension
+class BangpoundDoctrineCouchDBAdminExtension extends AbstractSonataAdminExtension
 {
     /**
      *
@@ -37,23 +37,23 @@ class SonataDoctrineMongoDBAdminExtension extends AbstractSonataAdminExtension
         $configs = $this->fixTemplatesConfiguration($configs, $container);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('doctrine_mongodb.xml');
-        $loader->load('doctrine_mongodb_filter_types.xml');
+        $loader->load('doctrine_couchdb.xml');
+        $loader->load('doctrine_couchdb_filter_types.xml');
         $loader->load('security.xml');
 
         $configuration = new Configuration();
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $pool = $container->getDefinition('sonata.admin.manager.doctrine_mongodb');
+        $pool = $container->getDefinition('sonata.admin.manager.doctrine_couchdb');
 
-        $container->setParameter('sonata_doctrine_mongodb_admin.templates', $config['templates']);
+        $container->setParameter('sonata_doctrine_couchdb_admin.templates', $config['templates']);
 
         // define the templates
-        $container->getDefinition('sonata.admin.builder.doctrine_mongodb_list')
+        $container->getDefinition('sonata.admin.builder.doctrine_couchdb_list')
             ->replaceArgument(1, $config['templates']['types']['list']);
 
-        $container->getDefinition('sonata.admin.builder.doctrine_mongodb_show')
+        $container->getDefinition('sonata.admin.builder.doctrine_couchdb_show')
             ->replaceArgument(1, $config['templates']['types']['show']);
     }
 }

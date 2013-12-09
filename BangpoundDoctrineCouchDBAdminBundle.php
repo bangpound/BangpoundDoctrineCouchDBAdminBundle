@@ -10,14 +10,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Sonata\DoctrineMongoDBAdminBundle\DependencyInjection\Compiler\AddGuesserCompilerPass;
-use Sonata\DoctrineMongoDBAdminBundle\DependencyInjection\Compiler\AddTemplatesCompilerPass;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\DependencyInjection\Compiler\AddGuesserCompilerPass;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\DependencyInjection\Compiler\AddTemplatesCompilerPass;
 
-class SonataDoctrineMongoDBAdminBundle extends Bundle
+class BangpoundDoctrineCouchDBAdminBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

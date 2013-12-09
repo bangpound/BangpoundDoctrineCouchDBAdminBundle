@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="sonata.admin.manager.doctrine_couchdb" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Model\ModelManager">
+            <argument type="service" id="doctrine_couchdb.odm.document_manager" on-invalid="ignore" />
+        </service>
+
+        <!-- FormBuilder -->
+        <service id="sonata.admin.builder.doctrine_couchdb_form" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Builder\FormContractor">
+            <argument type="service" id="form.factory" on-invalid="ignore" />
+        </service>
+
+        <!-- ListBuilder -->
+        <service id="sonata.admin.builder.doctrine_couchdb_list" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Builder\ListBuilder" >
+            <argument type="service" id="sonata.admin.guesser.doctrine_couchdb_list_chain" on-invalid="ignore" />
+            <argument />
+        </service>
+
+        <service id="sonata.admin.guesser.doctrine_couchdb_list" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Guesser\TypeGuesser">
+            <tag name="sonata.admin.guesser.doctrine_couchdb_list" />
+        </service>
+
+        <service id="sonata.admin.guesser.doctrine_couchdb_list_filter" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Guesser\FilterTypeGuesser">
+            <tag name="sonata.admin.guesser.doctrine_couchdb_list" />
+        </service>
+
+        <service id="sonata.admin.guesser.doctrine_couchdb_list_chain" class="Sonata\AdminBundle\Guesser\TypeGuesserChain">
+            <argument type="collection">
+                <argument type="service" id="sonata.admin.guesser.doctrine_couchdb_list" />
+            </argument>
+        </service>
+
+        <!-- ShowBuilder  -->
+        <service id="sonata.admin.builder.doctrine_couchdb_show" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Builder\ShowBuilder" >
+            <argument type="service" id="sonata.admin.guesser.doctrine_couchdb_show_chain" on-invalid="ignore" />
+            <argument />
+        </service>
+
+        <service id="sonata.admin.guesser.doctrine_couchdb_show" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Guesser\TypeGuesser">
+            <tag name="sonata.admin.guesser.doctrine_couchdb_show" />
+        </service>
+
+        <service id="sonata.admin.guesser.doctrine_couchdb_show_chain" class="Sonata\AdminBundle\Guesser\TypeGuesserChain">
+            <argument type="collection">
+                <argument type="service" id="sonata.admin.guesser.doctrine_couchdb_list" />
+            </argument>
+        </service>
+
+        <!-- DatagridBuilder guesser -->
+        <service id="sonata.admin.builder.doctrine_couchdb_datagrid" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Builder\DatagridBuilder">
+            <argument type="service" id="form.factory" on-invalid="ignore" />
+            <argument type="service" id="sonata.admin.builder.filter.factory" on-invalid="ignore" />
+            <argument type="service" id="sonata.admin.guesser.doctrine_couchdb_datagrid_chain" on-invalid="ignore" />
+            <argument>%form.type_extension.csrf.enabled%</argument>
+        </service>
+
+        <service id="sonata.admin.guesser.doctrine_couchdb_datagrid" class="Bangpound\Bundle\DoctrineCouchDBAdminBundle\Guesser\FilterTypeGuesser">
+            <tag name="sonata.admin.guesser.doctrine_couchdb_datagrid" />
+        </service>
+
+        <service id="sonata.admin.guesser.doctrine_couchdb_datagrid_chain" class="Sonata\AdminBundle\Guesser\TypeGuesserChain">
+            <argument type="collection">
+                <argument type="service" id="sonata.admin.guesser.doctrine_couchdb_list_filter" />
+            </argument>
+        </service>
+    </services>
+</container>

@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter;
 
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
@@ -18,11 +18,11 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 class NumberFilter extends Filter
 {
     /**
-     * @param ProxyQueryInterface $queryBuilder
-     * @param string              $alias
-     * @param string              $field
-     * @param string              $data
-     * @return
+     * @param  ProxyQueryInterface $queryBuilder
+     * @param  string              $alias
+     * @param  string              $field
+     * @param  string              $data
+     * @return void
      */
     public function filter(ProxyQueryInterface $queryBuilder, $alias, $field, $data)
     {

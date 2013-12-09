@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Guesser;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Guesser;
 
 use Sonata\AdminBundle\Guesser\TypeGuesserInterface;
 use Doctrine\ORM\Mapping\MappingException;
-use Sonata\DoctrineMongoDBAdminBundle\Model\ModelManager;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Model\ModelManager;
 
 abstract class AbstractTypeGuesser implements TypeGuesserInterface
 {
     /**
-     * @param string                                            $baseClass
-     * @param string                                            $propertyFullName
-     * @param  \Sonata\DoctrineMongoDBAdminBundle\Model\ModelManager $modelManager
+     * @param string                                                          $baseClass
+     * @param string                                                          $propertyFullName
+     * @param \Bangpound\Bundle\DoctrineCouchDBAdminBundle\Model\ModelManager $modelManager
      *
      * @return array|null
      */

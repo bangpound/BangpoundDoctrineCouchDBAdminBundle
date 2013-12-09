@@ -10,21 +10,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Model;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Model;
 
-use Sonata\DoctrineMongoDBAdminBundle\Admin\FieldDescription;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Admin\FieldDescription;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid\ProxyQuery;
 
 use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Doctrine\ODM\MongoDB\Query\Builder;
+use Doctrine\ODM\CouchDB\DocumentManager;
 
 use Symfony\Component\Form\Exception\PropertyAccessDeniedException;
 
-use Exporter\Source\DoctrineODMQuerySourceIterator;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\DoctrineODMQuerySourceIterator;
 
 class ModelManager implements ModelManagerInterface
 {
@@ -34,7 +33,7 @@ class ModelManager implements ModelManagerInterface
 
     /**
      *
-     * @param \Doctrine\ODM\MongoDB\DocumentManager $documentManager
+     * @param \Doctrine\ODM\CouchDB\DocumentManager $documentManager
      */
     public function __construct(DocumentManager $documentManager)
     {
@@ -57,7 +56,7 @@ class ModelManager implements ModelManagerInterface
      * @param string $propertyFullName The name of the fully qualified property (dot ('.') separated
      * property string)
      * @return array(
-     *     \Doctrine\ODM\MongoDB\Mapping\ClassMetadata $parentMetadata,
+     *     \Doctrine\ODM\CouchDB\Mapping\ClassMetadata $parentMetadata,
      *     string $lastPropertyName,
      *     array $parentAssociationMappings
      * )
@@ -219,7 +218,7 @@ class ModelManager implements ModelManagerInterface
     {
         $repository = $this->getDocumentManager()->getRepository($class);
 
-        return new ProxyQuery($repository->createQueryBuilder());
+        return new ProxyQuery($repository);
     }
 
     /**
@@ -227,10 +226,6 @@ class ModelManager implements ModelManagerInterface
      */
     public function executeQuery($query)
     {
-        if ($query instanceof Builder) {
-            return $query->getQuery()->execute();
-        }
-
         return $query->execute();
     }
 
@@ -327,7 +322,7 @@ class ModelManager implements ModelManagerInterface
         $query->setFirstResult($firstResult);
         $query->setMaxResults($maxResult);
 
-        return new DoctrineODMQuerySourceIterator($query instanceof ProxyQuery ? $query->getQuery() : $query, $fields);
+        return new DoctrineODMQuerySourceIterator($query, $fields);
     }
 
     /**

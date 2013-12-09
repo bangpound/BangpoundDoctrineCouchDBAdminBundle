@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Builder;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Builder;
 
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Admin\FieldDescriptionCollection;
 use Sonata\AdminBundle\Builder\ShowBuilderInterface;
 use Sonata\AdminBundle\Guesser\TypeGuesserInterface;
 
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Doctrine\ODM\CouchDB\Mapping\ClassMetadata;
 
 class ShowBuilder implements ShowBuilderInterface
 {
@@ -86,8 +86,8 @@ class ShowBuilder implements ShowBuilderInterface
     /**
      * The method defines the correct default settings for the provided FieldDescription
      *
-     * @param  \Sonata\AdminBundle\Admin\AdminInterface            $admin
-     * @param  \Sonata\AdminBundle\Admin\FieldDescriptionInterface $fieldDescription
+     * @param \Sonata\AdminBundle\Admin\AdminInterface            $admin
+     * @param \Sonata\AdminBundle\Admin\FieldDescriptionInterface $fieldDescription
      *
      * @return void
      */
@@ -130,17 +130,17 @@ class ShowBuilder implements ShowBuilderInterface
             $template = $this->getTemplate($fieldDescription->getType());
 
             if ($template === null) {
-                if ($fieldDescription->getMappingType() == ClassMetadataInfo::ONE) {
-                    $template = 'SonataDoctrineMongoDBAdminBundle:CRUD:show_mongo_one.html.twig';
-                } elseif ($fieldDescription->getMappingType() == ClassMetadataInfo::MANY) {
-                    $template = 'SonataDoctrineMongoDBAdminBundle:CRUD:show_mongo_many.html.twig';
+                if ($fieldDescription->getMappingType() == ClassMetadata::TO_ONE) {
+                    $template = 'BangpoundDoctrineCouchDBAdminBundle:CRUD:show_couch_one.html.twig';
+                } elseif ($fieldDescription->getMappingType() == ClassMetadata::TO_MANY) {
+                    $template = 'BangpoundDoctrineCouchDBAdminBundle:CRUD:show_couch_many.html.twig';
                 }
             }
 
             $fieldDescription->setTemplate($template);
         }
 
-        if (in_array($fieldDescription->getMappingType(), array(ClassMetadataInfo::ONE, ClassMetadataInfo::MANY))) {
+        if (in_array($fieldDescription->getMappingType(), array(ClassMetadata::TO_ONE, ClassMetadata::TO_MANY))) {
             $admin->attachAdminClass($fieldDescription);
         }
     }

@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Builder;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Builder;
 
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Admin\FieldDescriptionCollection;
 use Sonata\AdminBundle\Builder\ListBuilderInterface;
 use Sonata\AdminBundle\Guesser\TypeGuesserInterface;
 
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Doctrine\ODM\CouchDB\Mapping\ClassMetadata;
 
 class ListBuilder implements ListBuilderInterface
 {
@@ -62,7 +62,7 @@ class ListBuilder implements ListBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function addField (FieldDescriptionCollection $list, $type = null, FieldDescriptionInterface $fieldDescription, AdminInterface $admin)
+    public function addField(FieldDescriptionCollection $list, $type = null, FieldDescriptionInterface $fieldDescription, AdminInterface $admin)
     {
         $this->buildField($type, $fieldDescription, $admin);
         $admin->addListFieldDescription($fieldDescription->getName(), $fieldDescription);
@@ -137,23 +137,23 @@ class ListBuilder implements ListBuilderInterface
             $template = $this->getTemplate($fieldDescription->getType());
 
             if ($template === null) {
-                if ($fieldDescription->getMappingType() == ClassMetadataInfo::ONE) {
-                    $template = 'SonataDoctrineMongoDBAdminBundle:CRUD:list_mongo_one.html.twig';
-                } elseif ($fieldDescription->getMappingType() == ClassMetadataInfo::MANY) {
-                    $template = 'SonataDoctrineMongoDBAdminBundle:CRUD:list_mongo_many.html.twig';
+                if ($fieldDescription->getMappingType() == ClassMetadata::TO_ONE) {
+                    $template = 'BangpoundDoctrineCouchDBAdminBundle:CRUD:list_couch_one.html.twig';
+                } elseif ($fieldDescription->getMappingType() == ClassMetadata::TO_MANY) {
+                    $template = 'BangpoundDoctrineCouchDBAdminBundle:CRUD:list_couch_many.html.twig';
                 }
             }
 
             $fieldDescription->setTemplate($template);
         }
 
-        if (in_array($fieldDescription->getMappingType(), array(ClassMetadataInfo::ONE, ClassMetadataInfo::MANY))) {
+        if (in_array($fieldDescription->getMappingType(), array(ClassMetadata::TO_ONE, ClassMetadata::TO_MANY))) {
             $admin->attachAdminClass($fieldDescription);
         }
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Admin\FieldDescriptionInterface $fieldDescription
+     * @param \Sonata\AdminBundle\Admin\FieldDescriptionInterface $fieldDescription
      *
      * @return \Sonata\AdminBundle\Admin\FieldDescriptionInterface
      */

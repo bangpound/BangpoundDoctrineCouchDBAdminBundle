@@ -1,8 +1,8 @@
 Installation
 ============
 
-SonataDoctrineMongoDBAdminBundle is part of a set of bundles aimed at abstracting 
-storage connectivity for SonataAdminBundle. As such, SonataDoctrineMongoDBAdminBundle
+BangpoundDoctrineCouchDBAdminBundle is part of a set of bundles aimed at abstracting 
+storage connectivity for SonataAdminBundle. As such, BangpoundDoctrineCouchDBAdminBundle
 depends on SonataAdminBundle, and will not work without it. 
 
 .. note::
@@ -16,15 +16,15 @@ Use composer:
 
 .. code-block:: bash
 
-    php composer.phar require sonata-project/doctrine-mongodb-admin-bundle
+    php composer.phar require sonata-project/doctrine-couchdb-admin-bundle
 
 You'll be asked to type in a version constraint. 'dev-master' will usually get you the latest, bleeding edge
-version. Check `packagist <https://packagist.org/packages/sonata-project/doctrine-mongodb-admin-bundle>`_
+version. Check `packagist <https://packagist.org/packages/sonata-project/doctrine-couchdb-admin-bundle>`_
 for stable and legacy versions:
 
 .. code-block:: bash
 
-    Please provide a version constraint for the sonata-project/doctrine-mongodb-admin-bundle requirement: dev-master
+    Please provide a version constraint for the sonata-project/doctrine-couchdb-admin-bundle requirement: dev-master
 
 Configuration
 -------------
@@ -42,7 +42,7 @@ files:
             // ...
             // set up basic sonata requirements
             // ...
-            new Sonata\DoctrineMongoDBAdminBundle\SonataDoctrineMongoDBAdminBundle(),
+            new Bangpound\Bundle\DoctrineCouchDBAdminBundle\BangpoundDoctrineCouchDBAdminBundle(),
             // ...
         );
     }

@@ -10,9 +10,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Admin;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Admin;
 
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 use Sonata\AdminBundle\Admin\BaseFieldDescription;
 
 class FieldDescription extends BaseFieldDescription

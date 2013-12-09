@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\DependencyInjection;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sonata_doctrine_mongo_db_admin', 'array');
+        $rootNode = $treeBuilder->root('bangpound_doctrine_couch_db_admin', 'array');
 
         $rootNode
             ->children()
@@ -41,11 +41,11 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('form')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array('SonataDoctrineMongoDBAdminBundle:Form:form_admin_fields.html.twig'))
+                            ->defaultValue(array('BangpoundDoctrineCouchDBAdminBundle:Form:form_admin_fields.html.twig'))
                         ->end()
                         ->arrayNode('filter')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array('SonataDoctrineMongoDBAdminBundle:Form:filter_admin_fields.html.twig'))
+                            ->defaultValue(array('BangpoundDoctrineCouchDBAdminBundle:Form:filter_admin_fields.html.twig'))
                         ->end()
                         ->arrayNode('types')
                             ->children()

@@ -10,13 +10,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Guesser;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Guesser;
 
 use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Doctrine\ODM\CouchDB\Mapping\ClassMetadata;
 
 class FilterTypeGuesser extends AbstractTypeGuesser
 {
@@ -43,11 +43,8 @@ class FilterTypeGuesser extends AbstractTypeGuesser
             $mapping = $metadata->fieldMappings[$propertyName];
 
             switch ($mapping['type']) {
-                case ClassMetadataInfo::ONE:
-                case ClassMetadataInfo::MANY:
-                    //case ClassMetadataInfo::MANY_TO_ONE:
-                    //case ClassMetadataInfo::MANY_TO_MANY:
-
+                case ClassMetadata::TO_ONE:
+                case ClassMetadata::TO_MANY:
                     $options['operator_type']    = 'sonata_type_equal';
                     $options['operator_options'] = array();
 
@@ -59,43 +56,33 @@ class FilterTypeGuesser extends AbstractTypeGuesser
                     $options['field_name'] = $mapping['fieldName'];
                     $options['mapping_type'] = $mapping['type'];
 
-                    return new TypeGuess('doctrine_mongo_model', $options, Guess::HIGH_CONFIDENCE);
+                    return new TypeGuess('doctrine_couch_model', $options, Guess::HIGH_CONFIDENCE);
             }
         }
 
         $options['field_name'] = $metadata->fieldMappings[$propertyName]['fieldName'];
 
         switch ($metadata->getTypeOfField($propertyName)) {
+            case 'mixed':
+                return new TypeGuess('doctrine_couch_model', $options, Guess::MEDIUM_CONFIDENCE);
             case 'boolean':
                 $options['field_type'] = 'sonata_type_boolean';
                 $options['field_options'] = array();
 
-                return new TypeGuess('doctrine_mongo_boolean', $options, Guess::HIGH_CONFIDENCE);
-//            case 'datetime':
-//            case 'vardatetime':
-//            case 'datetimetz':
-//                return new TypeGuess('doctrine_orm_datetime', $options, Guess::HIGH_CONFIDENCE);
-//            case 'date':
-//                return new TypeGuess('doctrine_orm_date', $options, Guess::HIGH_CONFIDENCE);
-            case 'decimal':
-            case 'float':
-                return new TypeGuess('doctrine_mongo_number', $options, Guess::MEDIUM_CONFIDENCE);
-            case 'int':
-            case 'bigint':
-            case 'smallint':
+                return new TypeGuess('doctrine_couch_boolean', $options, Guess::HIGH_CONFIDENCE);
+            case 'datetime':
+                return new TypeGuess('doctrine_couch_datetime', $options, Guess::HIGH_CONFIDENCE);
+            case 'integer':
                 $options['field_type'] = 'number';
 
-                return new TypeGuess('doctrine_mongo_number', $options, Guess::MEDIUM_CONFIDENCE);
+                return new TypeGuess('doctrine_couch_number', $options, Guess::MEDIUM_CONFIDENCE);
             case 'id':
             case 'string':
-            case 'text':
                 $options['field_type'] = 'text';
 
-                return new TypeGuess('doctrine_mongo_string', $options, Guess::MEDIUM_CONFIDENCE);
-            case 'time':
-                return new TypeGuess('doctrine_mongo_time', $options, Guess::HIGH_CONFIDENCE);
+                return new TypeGuess('doctrine_couch_string', $options, Guess::MEDIUM_CONFIDENCE);
             default:
-                return new TypeGuess('doctrine_mongo_string', $options, Guess::LOW_CONFIDENCE);
+                return new TypeGuess('doctrine_couch_string', $options, Guess::LOW_CONFIDENCE);
         }
     }
 }
