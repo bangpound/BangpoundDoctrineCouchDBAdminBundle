@@ -10,12 +10,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Filter;
 
-use Sonata\DoctrineMongoDBAdminBundle\Filter\ModelFilter;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\ModelFilter;
+use Doctrine\ODM\CouchDB\Mapping\ClassMetadata;
 use Sonata\AdminBundle\Form\Type\EqualType;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid\ProxyQuery;
 
 class DocumentStub
 {
@@ -101,7 +101,7 @@ class ModelFilterTest extends FilterWithQueryBuilderTest
     public function testAssociationWithValidMappingAndEmptyFieldName()
     {
         $filter = new ModelFilter;
-        $filter->initialize('field_name', array('mapping_type' => ClassMetadataInfo::ONE, 'field_mapping' => true));
+        $filter->initialize('field_name', array('mapping_type' => ClassMetadata::TO_ONE, 'field_mapping' => true));
 
         $builder = new ProxyQuery($this->getQueryBuilder());
 
@@ -113,7 +113,7 @@ class ModelFilterTest extends FilterWithQueryBuilderTest
     {
         $filter = new ModelFilter;
         $filter->initialize('field_name', array(
-            'mapping_type' => ClassMetadataInfo::ONE,
+            'mapping_type' => ClassMetadata::TO_ONE,
             'field_name' => 'field_name',
             'association_mapping' => array(
                 'fieldName' => 'association_mapping'
@@ -131,7 +131,7 @@ class ModelFilterTest extends FilterWithQueryBuilderTest
     {
         $filter = new ModelFilter;
         $filter->initialize('field_name', array(
-            'mapping_type' => ClassMetadataInfo::ONE,
+            'mapping_type' => ClassMetadata::TO_ONE,
             'field_name' => 'field_name',
             'parent_association_mappings' => array(
                 array(

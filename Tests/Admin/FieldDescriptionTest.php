@@ -10,9 +10,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Admin;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Admin;
 
-use Sonata\DoctrineMongoDBAdminBundle\Admin\FieldDescription;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Admin\FieldDescription;
 
 class FieldDescriptionTest extends \PHPUnit_Framework_TestCase
 {

@@ -10,11 +10,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Filter;
 
-use Sonata\DoctrineMongoDBAdminBundle\Filter\ChoiceFilter;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\ChoiceFilter;
 use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid\ProxyQuery;
 
 class ChoiceFilterTest extends FilterWithQueryBuilderTest
 {

@@ -10,15 +10,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Model;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Model;
 
-use Sonata\DoctrineMongoDBAdminBundle\Model\ModelManager;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Model\ModelManager;
 
 class ModelManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterEmpty()
     {
-        $registry = $this->getMockBuilder('Doctrine\ODM\MongoDB\DocumentManager')
+        $registry = $this->getMockBuilder('Doctrine\ODM\CouchDB\DocumentManager')
                 ->disableOriginalConstructor()
                 ->getMock();
 

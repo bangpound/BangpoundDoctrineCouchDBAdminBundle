@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Filter;
 
-use Sonata\DoctrineMongoDBAdminBundle\Filter\Filter;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\Filter;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 class FilterTest_Filter extends Filter

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Filter;
 
 class FilterWithQueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class FilterWithQueryBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->queryBuilder = $this->getMockBuilder('Doctrine\ODM\MongoDB\Query\Builder')
+        $this->queryBuilder = $this->getMockBuilder('Doctrine\ODM\CouchDB\Query\Builder')
                 ->disableOriginalConstructor()
                 ->getMock();
         $this->queryBuilder

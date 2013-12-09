@@ -10,11 +10,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Filter;
 
-use Sonata\DoctrineMongoDBAdminBundle\Filter\NumberFilter;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\NumberFilter;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid\ProxyQuery;
 
 class NumberFilterTest extends FilterWithQueryBuilderTest
 {

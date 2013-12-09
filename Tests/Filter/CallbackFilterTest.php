@@ -10,10 +10,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Filter;
 
-use Sonata\DoctrineMongoDBAdminBundle\Filter\CallbackFilter;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\CallbackFilter;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid\ProxyQuery;
 
 class CallbackFilterTest extends FilterWithQueryBuilderTest
 {
@@ -23,7 +23,7 @@ class CallbackFilterTest extends FilterWithQueryBuilderTest
 
         $filter = new CallbackFilter;
         $filter->initialize('field_name', array(
-            'callback' => function($builder, $alias, $field, $value) {
+            'callback' => function ($builder, $alias, $field, $value) {
                 return true;
             }
         ));

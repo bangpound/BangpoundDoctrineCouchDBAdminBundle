@@ -10,11 +10,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\DoctrineMongoDBAdminBundle\Tests\Filter;
+namespace Bangpound\Bundle\DoctrineCouchDBAdminBundle\Tests\Filter;
 
-use Sonata\DoctrineMongoDBAdminBundle\Filter\BooleanFilter;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Filter\BooleanFilter;
 use Sonata\AdminBundle\Form\Type\BooleanType;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
+use Bangpound\Bundle\DoctrineCouchDBAdminBundle\Datagrid\ProxyQuery;
 
 class BooleanFilterTest extends FilterWithQueryBuilderTest
 {
